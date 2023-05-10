@@ -4,8 +4,8 @@ import logo from "../../../../public/logo.svg";
 const Footer = () => {
   return (
     <div className=" bg-[#151515] ">
-      <div className="car-container">
-        <footer className="footer p-10  text-white ">
+      <div className="car-container py-20">
+        <footer className="footer   text-white justify-between ">
           <div className="space-y-4">
             <img src={logo} alt="" />
             <p className="w-80">Edwin Diaz is a software and web technologies engineer, a life coach trainer who is also a serial.</p>

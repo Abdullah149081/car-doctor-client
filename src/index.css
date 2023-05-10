@@ -9,5 +9,20 @@
 }
 
 .car-container {
-  @apply px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20;
+  @apply sm:max-w-xl md:max-w-full lg:max-w-screen-xl xl:max-w-screen-2xl mx-auto px-8 md:px-24 md:py-20 2xl:px-0;
+}
+
+.car-btn {
+  @apply text-[#FF3811] bg-inherit border border-[#FF3811];
+}
+
+.btn-primary {
+  @apply text-white bg-[#FF3811] border-0 rounded-lg;
+}
+
+.btn {
+  @apply hover:bg-transparent;
+}
+.menu li {
+  @apply text-[#444444] font-bold;
 }
