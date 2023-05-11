@@ -24,6 +24,9 @@ const Header = () => {
       <li>
         <ActiveLink to="/contact">Contact</ActiveLink>
       </li>
+      <li>
+        <ActiveLink to="/sign-in">Sign In</ActiveLink>
+      </li>
     </>
   );
 
