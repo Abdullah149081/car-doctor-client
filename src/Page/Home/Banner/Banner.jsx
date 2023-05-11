@@ -25,7 +25,7 @@ const Banner = () => {
                 <button type="button" className="btn btn-primary">
                   Discover More
                 </button>
-                <button type="button" className="btn btn-outline border-white text-white">
+                <button type="button" className="btn btn-outline border-white text-white hover:bg-inherit">
                   Latest Project
                 </button>
               </div>

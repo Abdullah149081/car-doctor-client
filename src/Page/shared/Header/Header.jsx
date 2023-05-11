@@ -45,7 +45,7 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 ">{navItems}</ul>
         </div>
-        <div className="navbar-end  space-x-5">
+        <div className="navbar-end  space-x-5 text-accent">
           <HiOutlineShoppingBag className="w-6 h-6" />
           <FaSearch className="w-5 h-5" />
           <button type="button" className="lg:block hidden">
