@@ -8,7 +8,7 @@ const Footer = () => {
         <footer className="footer   text-white justify-between ">
           <div className="space-y-4">
             <img src={logo} alt="" />
-            <p className="w-80">Edwin Diaz is a software and web technologies engineer, a life coach trainer who is also a serial.</p>
+            <p className=" md:w-80">Edwin Diaz is a software and web technologies engineer, a life coach trainer who is also a serial.</p>
             <div className="flex gap-4 ">
               <FaGoogle className="w-5 h-5" />
               <FaInstagram className="w-5 h-5" />
