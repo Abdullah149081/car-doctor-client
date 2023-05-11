@@ -15,7 +15,22 @@ const Banner = () => {
       {banners.map((banner) => (
         <div key={banner.id} id={banner.id} className="carousel-item relative w-full">
           <img src={banner.img_banner} className="rounded-lg w-full lg:h-[600px] 2xl:h-[750px] " alt="banner" />
-          <div className="absolute flex justify-between transform -translate-y-1/2  gap-4 bottom-3 lg:bottom-12 right-3  lg:right-12 ">
+          <div className="absolute  text-white left-4 lg:left-56 top-1/4  lg:top-1/4 ">
+            <div className="hidden lg:block space-y-4">
+              <h2 className="text-7xl font-bold w-1/2">Affordable Price For Car Servicing</h2>
+              <p>There are many variations of passages of available, but the majority have suffered alteration in some form</p>
+            </div>
+            <div className="flex flex-col md:flex-row gap-4 lg:mt-8 ">
+              <button type="button" className="btn btn-primary">
+                Discover More
+              </button>
+              <button type="button" className="btn btn-outline border-white text-white">
+                Latest Project
+              </button>
+            </div>
+          </div>
+
+          <div className="absolute flex  transform -translate-y-1/2  gap-4 bottom-3 lg:bottom-12 right-3  lg:right-12 ">
             <a href={banner.previous} className="btn btn-circle border-0 bg-white bg-opacity-20 hover:bg-white hover:bg-opacity-20">
               <FiArrowLeft className="w-6 h-6" />
             </a>

@@ -13,16 +13,14 @@
 }
 
 .car-btn {
-  @apply text-[#FF3811] bg-inherit border border-[#FF3811];
+  @apply text-[#FF3811] bg-inherit border border-[#FF3811] hover:bg-inherit;
 }
 
 .btn-primary {
-  @apply text-white bg-[#FF3811] border-0 rounded-lg;
+  @apply text-white bg-[#FF3811] border-0 rounded-lg hover:bg-[#ff3811] hover:text-gray-800;
 }
 
-.btn {
-  @apply hover:bg-transparent;
-}
+
 .menu li {
   @apply text-[#444444] font-bold;
 }
