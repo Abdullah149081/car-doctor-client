@@ -3,25 +3,26 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../../../../public/logo.svg";
+import ActiveLink from "./ActiveLink";
 
 const Header = () => {
   const navItems = (
     <>
       <li>
-        <a>Home</a>
+        <ActiveLink to="/"> Home</ActiveLink>
       </li>
 
       <li>
-        <a>About</a>
+        <ActiveLink to="/about">About</ActiveLink>
       </li>
       <li>
-        <a>Services</a>
+        <ActiveLink to="/services">Services</ActiveLink>
       </li>
       <li>
-        <a>Blog</a>
+        <ActiveLink to="/blog">Blog</ActiveLink>
       </li>
       <li>
-        <a>Contact</a>
+        <ActiveLink to="/contact">Contact</ActiveLink>
       </li>
     </>
   );
@@ -32,7 +33,7 @@ const Header = () => {
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost pl-0  mr-5 lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
