@@ -15,10 +15,10 @@ const Banner = () => {
       {banners.map((banner) => (
         <div key={banner.id} id={banner.id} className="carousel-item relative w-full">
           <img src={banner.img_banner} className="rounded-xl w-full lg:h-[600px] 2xl:h-[750px] " alt="banner" />
-          <div className="absolute  text-white  inset-0 rounded-xl  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]   bg-blend-overlay">
+          <div className="absolute  text-white  inset-0 rounded-xl  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]   ">
             <div className="lg:left-56 top-1/4  lg:top-1/4 left-4 absolute">
               <div className="hidden lg:block space-y-4">
-                <h2 className="text-7xl font-bold w-1/2">Affordable Price For Car Servicing</h2>
+                <h2 className="text-7xl font-bold w-1/2 tracking-wide">Affordable Price For Car Servicing</h2>
                 <p>There are many variations of passages of available, but the majority have suffered alteration in some form</p>
               </div>
               <div className="flex flex-col md:flex-row gap-4 lg:mt-8 ">
