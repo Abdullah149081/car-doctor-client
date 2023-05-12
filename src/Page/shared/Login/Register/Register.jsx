@@ -1,5 +1,4 @@
-/* eslint-disable no-shadow */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,9 +6,11 @@ import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
 const Register = () => {
-  const [password, setPassword] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmError, setConfirmError] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { googleSignIn, createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -23,9 +24,10 @@ const Register = () => {
     const confirm = form.confirm.value;
 
     if (password !== confirm) {
-      setError("Those passwords didn't match ,Try again.");
+      setConfirmError("Confirm your password");
       return;
     }
+
     createUser(email, password)
       .then(() => {
         navigate("/");
@@ -37,9 +39,9 @@ const Register = () => {
 
   const handlePassword = (e) => {
     const passwordInput = e.target.value;
-    setPassword(passwordInput);
-    if (passwordInput.length < 6) {
-      setPasswordError("Password must be at least 6 characters long");
+    setPasswordValue(passwordInput);
+    if (passwordInput.length < 8) {
+      setPasswordError("Use 8 characters or more for your password");
     } else if (!/(?=.*[a-z])/.test(passwordInput)) {
       setPasswordError("should contain at least one lower case");
     } else {
@@ -49,11 +51,14 @@ const Register = () => {
 
   const handleConfirmPassword = (e) => {
     const confirm = e.target.value;
-    if (password !== confirm) {
-      setError("Those passwords didn't match ,Try again.");
+    if (passwordValue !== confirm) {
+      setConfirmError("Those passwords didn’t match. Try again.");
     } else {
-      setError("");
+      setConfirmError("");
     }
+  };
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handlerGoogle = () => {
@@ -64,8 +69,8 @@ const Register = () => {
       .catch(() => {});
   };
   return (
-    <div className="min-h-screen car-container">
-      <div className="mt-8 lg:mt-0  flex justify-center gap-12 flex-col-reverse lg:flex-row">
+    <div className="min-h-screen car-container lg:pt-4 ">
+      <div className="mt-8 lg:mt-0   flex justify-center gap-12 flex-col-reverse lg:flex-row">
         <div>
           <img src={login} alt={login} />
         </div>
@@ -88,16 +93,33 @@ const Register = () => {
               <label className="label">
                 <span className="label-text text-accent font-medium">Password</span>
               </label>
-              <input onChange={handlePassword} type="password" placeholder="Your password" value={password} name="password" className="input input-bordered text-gray-800" required />
+              <input
+                onChange={handlePassword}
+                type={showPassword ? "text" : "password"}
+                placeholder="Your password"
+                value={passwordValue}
+                name="password"
+                className={`input input-bordered text-gray-800 ${passwordError && "border-2 border-red-500 "}`}
+              />
               {passwordError && <span className="text-error text-xs mt-4">{passwordError}</span>}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-accent font-medium">Confirm Password</span>
               </label>
-              <input onChange={handleConfirmPassword} type="password" placeholder="Your password" name="confirm" className="input input-bordered text-gray-800" required />
+              <input
+                onChange={handleConfirmPassword}
+                type={showPassword ? "text" : "password"}
+                placeholder="Your password"
+                name="confirm"
+                className={`input input-bordered text-gray-800 ${confirmError && "border-2 border-red-500"}`}
+              />
+              {confirmError && <span className="text-error text-xs mt-4">{confirmError}</span>}
             </div>
             {error && <span className="text-error text-xs mt-2">{error}</span>}
+            <button onClick={handleShowPassword} className="text-gray-900 font-bold text-start" type="button">
+              {showPassword ? "Hide Password" : "Show Password"}
+            </button>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
                 Sign Up
