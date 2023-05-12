@@ -1,11 +1,17 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React from "react";
+import React, { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../../../../public/logo.svg";
+import { AuthContext } from "../../../providers/AuthProviders";
 import ActiveLink from "./ActiveLink";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handlerLogout = () => {
+    logOut();
+  };
+
   const navItems = (
     <>
       <li>
@@ -24,9 +30,11 @@ const Header = () => {
       <li>
         <ActiveLink to="/contact">Contact</ActiveLink>
       </li>
-      <li>
-        <ActiveLink to="/sign-in">Sign In</ActiveLink>
-      </li>
+      {!user && (
+        <li>
+          <ActiveLink to="/sign-in">Sign In</ActiveLink>
+        </li>
+      )}
     </>
   );
 
@@ -52,9 +60,15 @@ const Header = () => {
         <div className="navbar-end  space-x-5 text-accent">
           <HiOutlineShoppingBag className="w-6 h-6" />
           <FaSearch className="w-5 h-5" />
-          <button type="button" className="lg:block hidden">
-            <a className="btn car-btn  ">Appointment</a>
-          </button>
+          {user ? (
+            <button onClick={handlerLogout} type="button" className="lg:block hidden">
+              <span className="btn car-btn  ">LogOut</span>
+            </button>
+          ) : (
+            <button type="button" className="lg:block hidden">
+              <a className="btn car-btn  ">Appointment</a>
+            </button>
+          )}
         </div>
       </div>
     </div>

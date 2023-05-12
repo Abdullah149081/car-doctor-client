@@ -1,28 +1,25 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
-const Login = () => {
+const Register = () => {
   const { googleSignIn, signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
-  const handlerLogin = (e) => {
+  const handlerRegister = (e) => {
     e.preventDefault();
   };
 
   const handlerGoogle = () => {
     googleSignIn()
       .then(() => {
-        navigate(from, { replace: true });
+        navigate("/");
       })
       .catch(() => {});
   };
-
   return (
     <div className="min-h-screen car-container">
       <div className="mt-8 lg:mt-0  flex justify-center gap-12 flex-col-reverse lg:flex-row">
@@ -30,8 +27,14 @@ const Login = () => {
           <img src={login} alt={login} />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 border">
-          <h2 className="text-center text-4xl text-accent font-bold mt-12">Login</h2>
-          <form onSubmit={handlerLogin} className="card-body">
+          <h2 className="text-center text-4xl text-accent font-bold mt-12">Register</h2>
+          <form onSubmit={handlerRegister} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-accent font-medium">Name</span>
+              </label>
+              <input type="text" placeholder="Your name" className="input input-bordered text-gray-800" />
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-accent font-medium">Email</span>
@@ -43,15 +46,10 @@ const Login = () => {
                 <span className="label-text text-accent font-medium">Password</span>
               </label>
               <input type="text" placeholder="Your password" className="input input-bordered text-gray-800" />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover text-accent">
-                  Forgot password?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
-                Sign In
+                Sign Up
               </button>
             </div>
             <div className="text-center mt-4 text-accent font-bold">
@@ -71,9 +69,9 @@ const Login = () => {
                 </button>
               </div>
               <p className="mt-4">
-                Have an account?
-                <Link className="text-primary text-xs link-hover" to="/sign-up">
-                  Sign Up
+                Already have an account?
+                <Link className="text-primary text-xs link-hover" to="/sign-in">
+                  Sign In
                 </Link>
               </p>
             </div>
@@ -84,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
