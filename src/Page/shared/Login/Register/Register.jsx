@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+/* eslint-disable no-shadow */
+import React, { useContext, useEffect, useState } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,11 +7,53 @@ import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
 const Register = () => {
-  const { googleSignIn, signInUser } = useContext(AuthContext);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
+  const { googleSignIn, createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handlerRegister = (e) => {
     e.preventDefault();
+    setError("");
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+
+    if (password !== confirm) {
+      setError("Those passwords didn't match ,Try again.");
+      return;
+    }
+    createUser(email, password)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        setError(err?.message);
+      });
+  };
+
+  const handlePassword = (e) => {
+    const passwordInput = e.target.value;
+    setPassword(passwordInput);
+    if (passwordInput.length < 6) {
+      setPasswordError("Password must be at least 6 characters long");
+    } else if (!/(?=.*[a-z])/.test(passwordInput)) {
+      setPasswordError("should contain at least one lower case");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const handleConfirmPassword = (e) => {
+    const confirm = e.target.value;
+    if (password !== confirm) {
+      setError("Those passwords didn't match ,Try again.");
+    } else {
+      setError("");
+    }
   };
 
   const handlerGoogle = () => {
@@ -33,20 +76,28 @@ const Register = () => {
               <label className="label">
                 <span className="label-text text-accent font-medium">Name</span>
               </label>
-              <input type="text" placeholder="Your name" className="input input-bordered text-gray-800" />
+              <input type="text" placeholder="Your name" name="name" className="input input-bordered text-gray-800" required />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-accent font-medium">Email</span>
               </label>
-              <input type="text" placeholder="Your email" className="input input-bordered text-gray-800" />
+              <input type="email" placeholder="Your email" name="email" className="input input-bordered text-gray-800" required />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-accent font-medium">Password</span>
               </label>
-              <input type="text" placeholder="Your password" className="input input-bordered text-gray-800" />
+              <input onChange={handlePassword} type="password" placeholder="Your password" value={password} name="password" className="input input-bordered text-gray-800" required />
+              {passwordError && <span className="text-error text-xs mt-4">{passwordError}</span>}
             </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-accent font-medium">Confirm Password</span>
+              </label>
+              <input onChange={handleConfirmPassword} type="password" placeholder="Your password" name="confirm" className="input input-bordered text-gray-800" required />
+            </div>
+            {error && <span className="text-error text-xs mt-2">{error}</span>}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
                 Sign Up
