@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
 import logo from "../../public/logo.svg";
@@ -21,6 +22,7 @@ const Main = () => {
   return (
     <div>
       <Header />
+      <Toaster />
       <div className="md:min-h-[calc(100vh-470px)]">
         <Outlet />
       </div>

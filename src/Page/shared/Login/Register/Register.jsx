@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const Register = () => {
   const [confirmError, setConfirmError] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { googleSignIn, createUser } = useContext(AuthContext);
+  const { googleSignIn, createUser, updateUserData, validationEmail, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handlerRegister = (e) => {
@@ -29,8 +30,13 @@ const Register = () => {
     }
 
     createUser(email, password)
-      .then(() => {
-        navigate("/");
+      .then((result) => {
+        const newUser = result.user;
+        updateUserData(newUser, name);
+        validationEmail(newUser);
+        logOut();
+        toast.success("Check your email for verification");
+        navigate("/sign-in");
       })
       .catch((err) => {
         setError(err?.message);

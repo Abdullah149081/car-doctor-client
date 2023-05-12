@@ -30,7 +30,7 @@ const Header = () => {
       <li>
         <ActiveLink to="/contact">Contact</ActiveLink>
       </li>
-      {!user && (
+      {!user?.emailVerified && (
         <li>
           <ActiveLink to="/sign-in">Sign In</ActiveLink>
         </li>
@@ -60,13 +60,13 @@ const Header = () => {
         <div className="navbar-end  space-x-5 text-accent">
           <HiOutlineShoppingBag className="w-6 h-6" />
           <FaSearch className="w-5 h-5" />
-          {user ? (
+          {user?.emailVerified ? (
             <button onClick={handlerLogout} type="button" className="lg:block hidden">
               <span className="btn car-btn  ">LogOut</span>
             </button>
           ) : (
             <button type="button" className="lg:block hidden">
-              <a className="btn car-btn  ">Appointment</a>
+              <span className="btn car-btn  ">Appointment</span>
             </button>
           )}
         </div>

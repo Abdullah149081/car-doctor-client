@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,13 +7,32 @@ import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
 
 const Login = () => {
-  const { googleSignIn, signInUser } = useContext(AuthContext);
+  const { googleSignIn, signInUser, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState("");
   const from = location.state?.from?.pathname || "/";
 
   const handlerLogin = (e) => {
     e.preventDefault();
+    setError("");
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signInUser(email, password)
+      .then((result) => {
+        const verifyUser = result.user;
+        if (!verifyUser?.emailVerified) {
+          logOut();
+          toast.error("Thank you for signing up for our service. To verify your email address.");
+        } else {
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((err) => {
+        setError(err?.message);
+      });
   };
 
   const handlerGoogle = () => {
@@ -36,19 +56,20 @@ const Login = () => {
               <label className="label">
                 <span className="label-text text-accent font-medium">Email</span>
               </label>
-              <input type="text" placeholder="Your email" className="input input-bordered text-gray-800" />
+              <input type="email" name="email" placeholder="Your email" className="input input-bordered text-gray-800" />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-accent font-medium">Password</span>
               </label>
-              <input type="text" placeholder="Your password" className="input input-bordered text-gray-800" />
+              <input type="password" name="password" placeholder="Your password" className="input input-bordered text-gray-800" />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover text-accent">
+                <button type="button" className="label-text-alt link link-hover text-accent">
                   Forgot password?
-                </a>
+                </button>
               </label>
             </div>
+            {error && <span className="text-error text-xs mt-2">{error}</span>}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">
                 Sign In
