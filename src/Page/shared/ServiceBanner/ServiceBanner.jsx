@@ -5,8 +5,8 @@ const ServiceBanner = ({ children }) => {
   return (
     <div className="">
       <div className=" relative w-full">
-        <img src={checkout} className="rounded-xl w-full  " alt="banner" />
-        <div className="absolute  text-white  inset-0 rounded-xl  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+        <img src={checkout} className="rounded-lg w-full  " alt="banner" />
+        <div className="absolute  text-white  inset-0 rounded-lg  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
           <div className="lg:left-56 top-1/4  lg:top-1/4 left-4 absolute">
             <div className="">
               <h2 className="text-2xl lg:text-5xl font-bold  tracking-wide">{children[0].props.children}</h2>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Toaster } from "react-hot-toast";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
 import logo from "../../public/logo.svg";
 import Footer from "../Page/shared/Footer/Footer";
@@ -25,6 +25,7 @@ const Main = () => {
       <Toaster />
       <div className="md:min-h-[calc(100vh-470px)]">
         <Outlet />
+        <ScrollRestoration />
       </div>
       <Footer />
     </div>
