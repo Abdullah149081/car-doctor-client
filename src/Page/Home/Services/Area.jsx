@@ -1,5 +1,6 @@
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Area = ({ service }) => {
   const { img, _id, price, title } = service;
@@ -15,7 +16,7 @@ const Area = ({ service }) => {
           <div className="card-actions justify-end mt-2">
             <p className="text-primary font-bold">Price: ${price}</p>
             <div className="">
-              <FiArrowRight className="w-6 h-6 text-primary cursor-pointer" />
+              <Link to={`/checkout/${_id}`}><FiArrowRight className="w-6 h-6 text-primary cursor-pointer" /></Link>
             </div>
           </div>
         </div>

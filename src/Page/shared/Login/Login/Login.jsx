@@ -12,7 +12,6 @@ const Login = () => {
   const location = useLocation();
   const [error, setError] = useState("");
   const from = location.state?.from?.pathname || "/";
-
   const handlerLogin = (e) => {
     e.preventDefault();
     setError("");
@@ -92,7 +91,7 @@ const Login = () => {
                 </button>
               </div>
               <p className="mt-4">
-                Have an account?
+                New to car doctor?
                 <Link className="text-primary text-xs link-hover" to="/sign-up">
                   Sign Up
                 </Link>

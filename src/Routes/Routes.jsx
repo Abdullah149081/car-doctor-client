@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Checkout from "../Page/Checkout/Checkout";
 import Home from "../Page/Home/Home/Home";
 import ErrorPage from "../Page/shared/ErrorPage/ErrorPage";
 import Login from "../Page/shared/Login/Login/Login";
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <Register />,
+      },
+      {
+        path: "/checkout/:id",
+        element: <Checkout />,
       },
     ],
   },
