@@ -7,6 +7,7 @@ import Footer from "../Page/shared/Footer/Footer";
 import Header from "../Page/shared/Header/Header";
 import { AuthContext } from "../providers/AuthProviders";
 
+
 const Main = () => {
   const { loading } = useContext(AuthContext);
 

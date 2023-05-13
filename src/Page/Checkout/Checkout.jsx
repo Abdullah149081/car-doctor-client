@@ -20,20 +20,20 @@ const Checkout = () => {
             <form>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="form-control">
-                  <input type="text" placeholder="First Name" className="input input-bordered w-full text-gray-800" />
+                  <input type="text" name="first" placeholder="First Name" className="input input-bordered w-full text-gray-800" />
                 </div>
                 <div className="form-control">
-                  <input type="text" placeholder="Last Name" className="input input-bordered w-full text-gray-800" />
+                  <input type="text" name="last" placeholder="Last Name" className="input input-bordered w-full text-gray-800" />
                 </div>
                 <div className="form-control">
-                  <input type="tel" placeholder="Your Phone" className="input input-bordered w-full text-gray-800" />
+                  <input type="tel" name="phone" placeholder="Your Phone" className="input input-bordered w-full text-gray-800" />
                 </div>
                 <div className="form-control">
-                  <input type="email" placeholder="Your Email" className="input input-bordered w-full text-gray-800" />
+                  <input type="email" name="email" placeholder="Your Email" className="input input-bordered w-full text-gray-800" />
                 </div>
               </div>
               <div className="form-control my-4">
-                <textarea placeholder="Your Message" className="input input-bordered w-full text-gray-800 pt-4 h-60 lg:h-96" />
+                <textarea placeholder="Your Message" name="message" className="input input-bordered w-full text-gray-800 pt-4 h-60 lg:h-96" />
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">

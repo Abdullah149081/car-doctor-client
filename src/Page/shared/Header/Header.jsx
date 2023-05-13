@@ -17,10 +17,11 @@ const Header = () => {
       <li>
         <ActiveLink to="/"> Home</ActiveLink>
       </li>
-
-      <li>
-        <ActiveLink to="/about">About</ActiveLink>
-      </li>
+      {user?.emailVerified && (
+        <li>
+          <ActiveLink to="/bookings">Bookings</ActiveLink>
+        </li>
+      )}
       <li>
         <ActiveLink to="/services">Services</ActiveLink>
       </li>

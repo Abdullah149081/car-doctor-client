@@ -16,8 +16,17 @@ const Area = ({ service }) => {
           <div className="card-actions justify-end mt-2">
             <p className="text-primary font-bold">Price: ${price}</p>
             <div className="">
-              <Link to={`/checkout/${_id}`}><FiArrowRight className="w-6 h-6 text-primary cursor-pointer" /></Link>
+              <Link to={`/checkout/${_id}`}>
+                <FiArrowRight className="w-6 h-6 text-primary cursor-pointer" />
+              </Link>
             </div>
+          </div>
+          <div className="text-center mt-4">
+            <Link to={`/book-service/${_id}`}>
+              <button type="button" className="btn btn-primary">
+                Book Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>
