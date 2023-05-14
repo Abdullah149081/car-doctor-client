@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProviders";
 import ServiceBanner from "../shared/ServiceBanner/ServiceBanner";
@@ -55,6 +56,24 @@ const Bookings = () => {
       });
   };
 
+  const handleConfirm = (id) => {
+    fetch(`http://localhost:5000/booking/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: "confirm" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Successfully Confirm");
+          const newBooking = booking.filter((book) => book._id !== id);
+          setBooking(newBooking);
+        }
+      });
+  };
+
   return (
     <div className="car-container lg:py-10">
       <ServiceBanner>
@@ -93,8 +112,8 @@ const Bookings = () => {
                     <span className="badge badge-ghost">{book.date}</span>
                   </td>
                   <th>
-                    <button type="button" className="btn btn-primary">
-                      Pending
+                    <button onClick={() => handleConfirm(book._id)} type="button" className="btn btn-primary">
+                      Confirm
                     </button>
                   </th>
                 </tr>
