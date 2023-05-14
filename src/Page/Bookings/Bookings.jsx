@@ -68,7 +68,10 @@ const Bookings = () => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           toast.success("Successfully Confirm");
-          const newBooking = booking.filter((book) => book._id !== id);
+          const remaining = booking.filter((book) => book._id !== id);
+          const updatedBooking = booking.find((book) => book._id === id);
+          updatedBooking.status = "confirm";
+          const newBooking = [updatedBooking, ...remaining];
           setBooking(newBooking);
         }
       });
@@ -112,9 +115,13 @@ const Bookings = () => {
                     <span className="badge badge-ghost">{book.date}</span>
                   </td>
                   <th>
-                    <button onClick={() => handleConfirm(book._id)} type="button" className="btn btn-primary">
-                      Confirm
-                    </button>
+                    {book.status === "confirm" ? (
+                      <span className="text-primary">Confirm Order</span>
+                    ) : (
+                      <button onClick={() => handleConfirm(book._id)} type="button" className="btn btn-primary">
+                        Please Confirm
+                      </button>
+                    )}
                   </th>
                 </tr>
               </tbody>
