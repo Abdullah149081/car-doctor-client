@@ -30,7 +30,7 @@ const BookService = () => {
       img: booking.img,
     };
 
-    fetch("http://localhost:5000/booking", {
+    fetch("https://car-doctor-server-beta-five.vercel.app/booking", {
       method: "POST",
       headers: {
         "content-Type": "application/json",

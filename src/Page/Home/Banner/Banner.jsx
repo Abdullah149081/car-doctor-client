@@ -5,7 +5,7 @@ const Banner = () => {
   const [banners, setBanner] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/banner")
+    fetch("https://car-doctor-server-beta-five.vercel.app/banner")
       .then((res) => res.json())
       .then((data) => setBanner(data));
   }, []);
