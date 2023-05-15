@@ -9,7 +9,11 @@ import ActiveLink from "./ActiveLink";
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const handlerLogout = () => {
-    logOut();
+    logOut()
+      .then(() => {
+        localStorage.removeItem("car-doctor-access");
+      })
+      .catch(() => {});
   };
 
   const navItems = (

@@ -22,11 +22,26 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         const verifyUser = result.user;
+        const logUser = {
+          email: verifyUser.email,
+        };
+
         if (!verifyUser?.emailVerified) {
           logOut();
           toast.error("Thank you for signing up for our service. To verify your email address.");
         } else {
-          navigate(from, { replace: true });
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(logUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              localStorage.setItem("car-doctor-access", data.token);
+              navigate(from, { replace: true });
+            });
         }
       })
       .catch((err) => {
