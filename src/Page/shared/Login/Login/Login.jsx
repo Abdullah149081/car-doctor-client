@@ -30,6 +30,7 @@ const Login = () => {
           logOut();
           toast.error("Thank you for signing up for our service. To verify your email address.");
         } else {
+          // jwt
           fetch("http://localhost:5000/jwt", {
             method: "POST",
             headers: {

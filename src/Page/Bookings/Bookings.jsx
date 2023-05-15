@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProviders";
 import ServiceBanner from "../shared/ServiceBanner/ServiceBanner";
@@ -8,13 +9,25 @@ import ServiceBanner from "../shared/ServiceBanner/ServiceBanner";
 const Bookings = () => {
   const { user } = useContext(AuthContext);
   const [booking, setBooking] = useState([]);
+  const navigate = useNavigate();
 
   const URL = `http://localhost:5000/booking?email=${user?.email}`;
   useEffect(() => {
-    fetch(URL)
+    fetch(URL, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("car-doctor-access")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setBooking(data));
-  }, [URL]);
+      .then((data) => {
+        if (!data.err) {
+          setBooking(data);
+        } else {
+          navigate("/");
+        }
+      });
+  }, [URL, navigate]);
 
   const handleDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -84,7 +97,7 @@ const Bookings = () => {
         <span>Home-Product Details</span>
       </ServiceBanner>
       <div className="mt-10">
-        {booking.map((book) => (
+        {booking?.map((book) => (
           <div key={book._id} className="overflow-x-auto w-full text-accent font-bold">
             <table className="table w-full">
               <tbody>
