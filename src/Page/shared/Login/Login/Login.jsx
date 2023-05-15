@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
+import Social from "../Social/Social";
 
 const Login = () => {
-  const { googleSignIn, signInUser, logOut } = useContext(AuthContext);
+  const { signInUser, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
@@ -22,40 +22,17 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         const verifyUser = result.user;
-        const logUser = {
-          email: verifyUser.email,
-        };
 
         if (!verifyUser?.emailVerified) {
           logOut();
           toast.error("Thank you for signing up for our service. To verify your email address.");
         } else {
-          // jwt
-          fetch("http://localhost:5000/jwt", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(logUser),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              localStorage.setItem("car-doctor-access", data.token);
-              navigate(from, { replace: true });
-            });
+          navigate(from, { replace: true });
         }
       })
       .catch((err) => {
         setError(err?.message);
       });
-  };
-
-  const handlerGoogle = () => {
-    googleSignIn()
-      .then(() => {
-        navigate(from, { replace: true });
-      })
-      .catch(() => {});
   };
 
   return (
@@ -90,29 +67,7 @@ const Login = () => {
                 Sign In
               </button>
             </div>
-            <div className="text-center mt-4 text-accent font-bold">
-              <h2 className="">Or Sign In with</h2>
-              <div className="flex justify-center items-center gap-4 mt-4 divide-x-2 divide-y-2 divide-orange-500 divide-dotted  ">
-                <span />
-                <button onClick={handlerGoogle} type="button" className="btn rounded-full bg-[#F5F5F8] border-0 ">
-                  <FcGoogle className="w-5 h-5" />
-                </button>
-
-                <button type="button" className="btn rounded-full bg-[#F5F5F8] border-0">
-                  <FaLinkedinIn className="w-5 h-5 text-gray-900" />
-                </button>
-
-                <button type="button" className="btn rounded-full bg-[#F5F5F8] border-0">
-                  <FaFacebookF className="w-5 h-5 text-gray-900" />
-                </button>
-              </div>
-              <p className="mt-4">
-                New to car doctor?
-                <Link className="text-primary text-xs link-hover" to="/sign-up">
-                  Sign Up
-                </Link>
-              </p>
-            </div>
+            <Social>sign-up</Social>
           </form>
         </div>
       </div>

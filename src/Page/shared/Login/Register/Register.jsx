@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import login from "../../../../assets/images/login/login.svg";
 import { AuthContext } from "../../../../providers/AuthProviders";
+import Social from "../Social/Social";
 
 const Register = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -12,7 +12,7 @@ const Register = () => {
   const [confirmError, setConfirmError] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { googleSignIn, createUser, updateUserData, validationEmail, logOut } = useContext(AuthContext);
+  const { createUser, updateUserData, validationEmail, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handlerRegister = (e) => {
@@ -67,13 +67,6 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
-  const handlerGoogle = () => {
-    googleSignIn()
-      .then(() => {
-        navigate("/");
-      })
-      .catch(() => {});
-  };
   return (
     <div className="min-h-screen car-container lg:pt-4 ">
       <div className="mt-8 lg:mt-0   flex justify-center gap-12 flex-col-reverse lg:flex-row">
@@ -131,29 +124,7 @@ const Register = () => {
                 Sign Up
               </button>
             </div>
-            <div className="text-center mt-4 text-accent font-bold">
-              <h2 className="">Or Sign In with</h2>
-              <div className="flex justify-center items-center gap-4 mt-4 divide-x-2 divide-y-2 divide-orange-500 divide-dotted  ">
-                <span />
-                <button onClick={handlerGoogle} type="button" className="btn rounded-full bg-[#F5F5F8] border-0 ">
-                  <FcGoogle className="w-5 h-5" />
-                </button>
-
-                <button type="button" className="btn rounded-full bg-[#F5F5F8] border-0">
-                  <FaLinkedinIn className="w-5 h-5 text-gray-900" />
-                </button>
-
-                <button type="button" className="btn rounded-full bg-[#F5F5F8] border-0">
-                  <FaFacebookF className="w-5 h-5 text-gray-900" />
-                </button>
-              </div>
-              <p className="mt-4">
-                Already have an account?
-                <Link className="text-primary text-xs link-hover" to="/sign-in">
-                  Sign In
-                </Link>
-              </p>
-            </div>
+            <Social>sign-in</Social>
           </form>
         </div>
       </div>

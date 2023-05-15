@@ -10,9 +10,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const handlerLogout = () => {
     logOut()
-      .then(() => {
-        localStorage.removeItem("car-doctor-access");
-      })
+      .then(() => {})
       .catch(() => {});
   };
 
